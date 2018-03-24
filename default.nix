@@ -1,9 +1,8 @@
 { system ? builtins.currentSystem }:
-
-with (import <nixpkgs> { });
+with (import ./nixpkgs { });
 
 let
-  testing = import <nixpkgs/nixos/lib/testing.nix> { inherit system; };
+  testing = import ./nixpkgs/nixos/lib/testing.nix { inherit system; };
 
 in {
 
@@ -11,10 +10,14 @@ in {
 
     name = "first-test";
 
-    machine = { config, lib, pkgs, ... }: {};
+    machine = { config, lib, pkgs, ... }: {
+      environment.systemPackages = with pkgs; [
+        go-ethereum
+      ];
+    };
 
     testScript = ''
-        $machine->succeed("ls /dev");
+      $machine->succeed("ls /dev");
     '';
   };
 
