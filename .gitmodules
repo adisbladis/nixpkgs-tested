@@ -2,3 +2,6 @@
 	path = nixpkgs
 	url = https://github.com/NixOS/nixpkgs-channels.git
 	branch = nixos-unstable-small
+[submodule "nixpkgs-dapphub"]
+	path = dapphub
+	url = https://github.com/dapphub/nixpkgs-dapphub.git
